@@ -67,10 +67,11 @@
     .tip-box { background: #f0fdf4; border-left: 3px solid #22c55e; padding: 8px 10px; border-radius: 6px; font-size: 12px; color: #166534; margin-top: 8px; line-height: 1.4; }
     
     .cost-input-group { display: flex; gap: 6px; align-items: center; }
-    .cost-input { width: 75px; padding: 4px 6px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; text-align: right; }
-    .currency-select { padding: 4px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 11px; background: #f8fafc; }
+    .cost-input { width: 75px; padding: 4px 6px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; text-align: right; display: none; }
+    .currency-select { padding: 4px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 11px; background: #f8fafc; display: none; }
+    .locked-cost-text { font-weight: 600; color: #64748b; font-size: 12px; }
     
-    .add-item-btn { width: 100%; padding: 8px; background: #f1f5f9; border: 1px dashed #cbd5e1; border-radius: 10px; font-size: 12px; font-weight: 600; color: #475569; cursor: pointer; margin-top: 4px; }
+    .add-item-btn { width: 100%; padding: 8px; background: #f1f5f9; border: 1px dashed #cbd5e1; border-radius: 10px; font-size: 12px; font-weight: 600; color: #475569; cursor: pointer; margin-top: 4px; display: none; }
     .add-item-btn:hover { background: #e2e8f0; }
 
     .grand-total-box { background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; border-radius: 16px; padding: 20px; margin-top: 30px; box-shadow: var(--shadow); }
@@ -91,7 +92,7 @@
           <p>12-Day Dive & Music Festival</p>
         </div>
       </div>
-      <button class="unlock-btn" onclick="unlockSecret()">🔒 解鎖代號</button>
+      <button class="unlock-btn" onclick="unlockSecret()">🔒 解鎖全部資訊</button>
     </div>
 
     <!-- Live Countdown Banner -->
@@ -105,7 +106,7 @@
     <div class="cash-alert-box">
       <div class="cash-alert-title">💵 現金支付提醒 (Cash Only)</div>
       <div>需準備現金項目：台東民宿 ＋ 小琉球 OW 包套 ＋ 綠島 AOW 包套</div>
-      <div class="cash-alert-amount" id="cashTotalDisplay">現金總計：約 HK$ 7,247.00 (約 NT$ 30,075.05)</div>
+      <div class="cash-alert-amount secret-cash" id="cashTotalDisplay">🔒 [已加密 - 請點擊右上角解鎖]</div>
     </div>
 
     <div class="exchange-rate-banner">
@@ -138,11 +139,14 @@
       <div class="event-card" onclick="toggleCard(event, this)" data-time="2026-08-13T11:05:00" data-name="國泰 CX424 (HKG ✈️ KHH)">
         <div class="card-main"><div><div class="time-slot">11:05 - 12:40</div><div class="event-title">✈️ 國泰 CX424 (HKG ✈️ KHH)</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
-          <div class="detail-row"><span class="detail-label">Ref / 票號</span><span class="detail-value secret-field" data-secret="DGUTJT / 1602134312814">[已鎖定 / 請點擊解鎖]</span></div>
+          <div class="detail-row"><span class="detail-label">Ref / 票號</span><span class="detail-value secret-field" data-secret="DGUTJT / 1602134312814">[已鎖定]</span></div>
           <div class="detail-row"><span class="detail-label">機票開支</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="415" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="415" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>起飛前 48 小時線上預辦登機選好靠窗座位。</div>
@@ -152,9 +156,12 @@
         <div class="card-main"><div><div class="time-slot">13:00 - 14:25</div><div class="event-title">🚕 計程車 ➔ 東港 🚢 小琉球</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">交通開支</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="50" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="50" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>上船前記得先食暈浪丸。</div>
@@ -164,21 +171,27 @@
         <div class="card-main"><div><div class="time-slot">14:30 - 18:00</div><div class="event-title">🤿 小琉球 OW 潛水考照 Day 1 (現金)</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">OW 包套 (含宿/裝備)</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost cash-item" value="3400" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost cash-item" value="3400" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="detail-row"><span class="detail-label">晚餐/雜項</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="130" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="130" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>此筆包套費為<b>現金支付</b>。</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 3,995.00</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -192,15 +205,18 @@
         <div class="card-main"><div><div class="time-slot">全天</div><div class="event-title">🤿 小琉球 OW 潛水考照 Day 2</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">餐費/雜項</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="130" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="130" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>注意補充水分，潛水前後不要吃太飽。</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 130.00</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -214,15 +230,18 @@
         <div class="card-main"><div><div class="time-slot">全天</div><div class="event-title">🤿 小琉球 OW 考核與結業</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">慶祝晚餐</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="140" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="140" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>完成筆試與術科即可畢業！</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 140.00</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -236,15 +255,21 @@
         <div class="card-main"><div><div class="time-slot">13:00 - 16:30</div><div class="event-title">🚢 返東港 ➔ 枋寮 🚆 台東火車</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">交通開支</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="180" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="180" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="detail-row"><span class="detail-label">市區交通/晚餐</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="100" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="100" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>自強號火車票建議提早訂好。</div>
@@ -253,17 +278,20 @@
       <div class="event-card" onclick="toggleCard(event, this)" data-time="2026-08-16T15:00:00" data-name="Easy Life Simple Life B&B Check-in">
         <div class="card-main"><div><div class="time-slot">15:00 Check-in</div><div class="event-title">🏠 Easy Life B&B (現金)</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
-          <div class="detail-row"><span class="detail-label">Agoda Ref</span><span class="detail-value secret-field" data-secret="1758199955">[已鎖定 / 請點擊解鎖]</span></div>
+          <div class="detail-row"><span class="detail-label">Agoda Ref</span><span class="detail-value secret-field" data-secret="1758199955">[已鎖定]</span></div>
           <div class="detail-row"><span class="detail-label">住宿房費 (2晚)</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost cash-item" value="947" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost cash-item" value="947" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>此民宿為<b>現金結算</b>。</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 1,227.00</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -277,15 +305,18 @@
         <div class="card-main"><div><div class="time-slot">全天</div><div class="event-title">💻 台東 WFH 遠距工作</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">餐費/外賣</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="250" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="250" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>找間有插座的特色 Cafe 邊工作邊享受台東慢活。</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 250.00</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -299,27 +330,36 @@
         <div class="card-main"><div><div class="time-slot">08:30 - 10:20</div><div class="event-title">🚕 富岡港 🚢 綠島 (海子潛水旅宿)</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">交通開支</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="73" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="73" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="detail-row"><span class="detail-label">AOW 包套 (含宿/裝備)</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost cash-item" value="2900" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost cash-item" value="2900" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="detail-row"><span class="detail-label">島上餐費</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="150" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="150" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>此包套費為<b>現金支付</b>。</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 3,123.00</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -333,15 +373,18 @@
         <div class="card-main"><div><div class="time-slot">全天</div><div class="event-title">🤿 綠島 AOW 訓練與夜潛</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">島上餐費</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="150" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="150" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>今日進行深潛與夜潛，注意聽教練安全簡報。</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 150.00</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -355,15 +398,21 @@
         <div class="card-main"><div><div class="time-slot">14:30 - 19:00</div><div class="event-title">🚢 綠島返富岡 🚆 台東 🚆 高雄</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">交通開支</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="161" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="161" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="detail-row"><span class="detail-label">夜市晚餐</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="150" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="150" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>晚餐直接殺去高雄夜市大快朵頤。</div>
@@ -372,17 +421,20 @@
       <div class="event-card" onclick="toggleCard(event, this)" data-time="2026-08-20T15:00:00" data-name="頭等艙飯店 - 高雄站前館 Check-in">
         <div class="card-main"><div><div class="time-slot">15:00 Check-in</div><div class="event-title">🏨 頭等艙飯店 - 高雄站前館</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
-          <div class="detail-row"><span class="detail-label">Agoda Ref</span><span class="detail-value secret-field" data-secret="1758213494">[已鎖定 / 請點擊解鎖]</span></div>
+          <div class="detail-row"><span class="detail-label">Agoda Ref</span><span class="detail-value secret-field" data-secret="1758213494">[已鎖定]</span></div>
           <div class="detail-row"><span class="detail-label">房費</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="341.56" data-curr="HKD" step="0.01" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="341.56" data-curr="HKD" step="0.01" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>飯店就在高雄車站對面，極為方便。</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 652.56</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -395,11 +447,14 @@
       <div class="event-card" onclick="toggleCard(event, this)" data-time="2026-08-21T11:40:00" data-name="立榮 B7-8697 (KHH ✈️ MZG)">
         <div class="card-main"><div><div class="time-slot">11:40 - 12:25</div><div class="event-title">✈️ 立榮 B7-8697 (KHH ✈️ MZG)</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
-          <div class="detail-row"><span class="detail-label">Ref / 票號</span><span class="detail-value secret-field" data-secret="E4M2N2 / 5252471545221">[已鎖定 / 請點擊解鎖]</span></div>
+          <div class="detail-row"><span class="detail-label">Ref / 票號</span><span class="detail-value secret-field" data-secret="E4M2N2 / 5252471545221">[已鎖定]</span></div>
           <div class="detail-row"><span class="detail-label">機票開支</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="441" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="441" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>國內線行李限重較嚴格。</div>
@@ -408,11 +463,14 @@
       <div class="event-card" onclick="toggleCard(event, this)" data-time="2026-08-21T14:00:00" data-name="安海景大飯店 Check-in & 租機車">
         <div class="card-main"><div><div class="time-slot">14:00 Check-in</div><div class="event-title">🏨 安海景大飯店 (機車租借)</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
-          <div class="detail-row"><span class="detail-label">Agoda Ref</span><span class="detail-value secret-field" data-secret="1758184888">[已鎖定 / 請點擊解鎖]</span></div>
+          <div class="detail-row"><span class="detail-label">Agoda Ref</span><span class="detail-value secret-field" data-secret="1758184888">[已鎖定]</span></div>
           <div class="detail-row"><span class="detail-label">機場租機車 (2天)</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="100" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="100" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>機場直接取車騎往市區。</div>
@@ -422,15 +480,18 @@
         <div class="card-main"><div><div class="time-slot">18:00 - 22:00</div><div class="event-title">🎸 澎大海音樂祭 Day 1 + 海鮮大餐</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">餐費/音樂祭雜項</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="250" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="250" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>今晚有告五人，記得準備防蚊液與水瓶。</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 791.00</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -444,15 +505,18 @@
         <div class="card-main"><div><div class="time-slot">白天</div><div class="event-title">💻 澎湖 WFH 遠距工作</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">餐費/咖啡</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="250" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="250" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>下午傍晚無縫接軌衝音樂祭！</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 250.00</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -466,21 +530,27 @@
         <div class="card-main"><div><div class="time-slot">18:30</div><div class="event-title">🎸 澎大海音樂祭 Day 3 ➔ 飛台北松山</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">澎湖返台北機票預估</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="500" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="500" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="detail-row"><span class="detail-label">台北餐費/捷運</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="200" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="200" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>看完表演趕往機場還機車，搭晚班機飛回台北松山。</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 700.00</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -494,21 +564,27 @@
         <div class="card-main"><div><div class="time-slot">晚上</div><div class="event-title">✈️ 台北 (TPE) ✈️ 香港 (HKG)</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
           <div class="detail-row"><span class="detail-label">機捷 + 返港機票</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="510" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="510" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="detail-row"><span class="detail-label">台北餐費/伴手禮</span>
-            <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="150" data-curr="HKD" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+            <div>
+              <span class="locked-cost-text">🔒 [已加密]</span>
+              <div class="cost-input-group" onclick="event.stopPropagation()">
+                <input type="number" class="cost-input item-cost" value="150" data-curr="HKD" oninput="calculateTotals()">
+                <select class="currency-select" onchange="calculateTotals()"><option value="HKD" selected>HKD</option><option value="NTD">NTD</option></select>
+              </div>
             </div>
           </div>
           <div class="tip-box">💡 <b>Tips：</b>預留充裕時間搭機捷到桃園機場準備回港！</div>
           <div class="detail-row" style="border-top:1px solid #eee; margin-top:8px; padding-top:6px;">
             <span class="detail-label" style="font-weight:700;">📅 當日小計</span>
-            <span class="detail-value day-subtotal" style="color:var(--time-color);">HK$ 660.00</span>
+            <span class="detail-value day-subtotal" style="color:var(--time-color);">🔒 [已加密]</span>
           </div>
         </div>
       </div>
@@ -518,22 +594,35 @@
     <!-- Grand Total Box at Bottom -->
     <div class="grand-total-box">
       <h3><span>💰 全程總預算加總 (Grand Total)</span></h3>
-      <div class="grand-total-amount" id="grandTotalHkd">HK$ 12,026.56</div>
-      <div class="grand-total-sub" id="grandTotalNtd">約 NT$ 49,910.22</div>
+      <div class="grand-total-amount" id="grandTotalHkd">🔒 [已加密]</div>
+      <div class="grand-total-sub" id="grandTotalNtd">🔒 請輸入密碼解鎖檢視</div>
     </div>
 
   </div>
 
   <script>
+    let isUnlocked = false;
+
     // 解鎖密碼設定為 98523044
     function unlockSecret() {
-      const pin = prompt("請輸入解鎖 PIN 碼以檢視私人代號：");
+      const pin = prompt("請輸入解鎖 PIN 碼以檢視私人代號與開支：");
       if (pin === "98523044") {
+        isUnlocked = true;
+        
+        // 顯示所有私人代號
         document.querySelectorAll('.secret-field').forEach(el => {
           el.innerText = el.getAttribute('data-secret');
           el.style.color = "#0284c7";
         });
-        alert("解鎖成功！");
+
+        // 顯示所有金額輸入框與按鈕，隱藏加密文字
+        document.querySelectorAll('.cost-input').forEach(el => el.style.display = 'block');
+        document.querySelectorAll('.currency-select').forEach(el => el.style.display = 'block');
+        document.querySelectorAll('.locked-cost-text').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.add-item-btn').forEach(el => el.style.display = 'block');
+
+        calculateTotals();
+        alert("解鎖成功！所有開支與代號已顯示。");
       } else if (pin !== null) {
         alert("密碼錯誤！");
       }
@@ -553,6 +642,11 @@
     }
 
     function addNewItem(dateStr) {
+      if (!isUnlocked) {
+        alert("請先點擊右上角解鎖後才能新增開支！");
+        return;
+      }
+
       const daySection = document.querySelector(`.day-section[data-date="${dateStr}"]`);
       if (!daySection) return;
 
@@ -575,8 +669,8 @@
         <div class="card-details" style="display: block;">
           <div class="detail-row"><span class="detail-label">${itemName}</span>
             <div class="cost-input-group" onclick="event.stopPropagation()">
-              <input type="number" class="cost-input item-cost" value="${costVal}" data-curr="${curr}" oninput="calculateTotals()">
-              <select class="currency-select" onchange="calculateTotals()">
+              <input type="number" class="cost-input item-cost" value="${costVal}" data-curr="${curr}" oninput="calculateTotals()" style="display:block;">
+              <select class="currency-select" onchange="calculateTotals()" style="display:block;">
                 <option value="HKD" ${curr === 'HKD' ? 'selected' : ''}>HKD</option>
                 <option value="NTD" ${curr === 'NTD' ? 'selected' : ''}>NTD</option>
               </select>
@@ -599,6 +693,8 @@
     }
 
     function calculateTotals() {
+      if (!isUnlocked) return; // 未解鎖時不計算
+
       const rate = parseFloat(document.getElementById('rateInput').value) || 4.15;
       let grandTotalHkd = 0;
       let cashTotalHkd = 0;
@@ -678,7 +774,6 @@
     }
 
     window.onload = function() {
-      calculateTotals();
       setInterval(updateCountdown, 1000);
       updateCountdown();
     };
