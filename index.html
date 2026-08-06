@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Taiwan 2026 Travel Itinerary</title>
+  <title>Taiwan 2026 Travel Itinerary & Dive Master</title>
   <style>
     :root {
       --primary: #0284c7;
@@ -16,403 +16,207 @@
       --border: #f1f5f9;
       --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      padding-bottom: 40px;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    /* Top Bar */
-    header {
-      background: var(--card-bg);
-      padding: 16px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .brand-icon {
-      font-size: 28px;
-    }
-
-    .brand-title h1 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .brand-title p {
-      font-size: 12px;
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    /* Date Filter Tabs */
-    .date-tabs {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scrollbar-width: none;
-    }
-
-    .date-tabs::-webkit-scrollbar {
-      display: none;
-    }
-
-    .tab-btn {
-      flex: 0 0 auto;
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-sub);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .tab-btn.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
-
-    /* Itinerary Content */
-    .itinerary-container {
-      padding: 16px;
-    }
-
-    .day-section {
-      margin-bottom: 24px;
-    }
-
-    .day-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .day-title {
-      font-size: 16px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .day-pills {
-      display: flex;
-      gap: 6px;
-    }
-
-    .pill {
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: 12px;
-      background: var(--border);
-      color: var(--text-sub);
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    /* Event Card */
-    .event-card {
-      background: var(--card-bg);
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 10px;
-      box-shadow: var(--shadow);
-      border-left: 4px solid var(--primary);
-      transition: all 0.2s ease;
-    }
-
-    .card-main {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .time-slot {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--time-color);
-      margin-bottom: 4px;
-    }
-
-    .event-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .card-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .icon-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      border: none;
-      background: #f0fdf4;
-      color: #16a34a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .icon-btn.blue {
-      background: #f0f9ff;
-      color: #0284c7;
-    }
-
-    .icon-btn.pink {
-      background: #fdf2f8;
-      color: #db2777;
-    }
-
-    .chevron {
-      font-size: 12px;
-      color: var(--text-sub);
-      margin-left: 4px;
-      transition: transform 0.2s;
-    }
-
-    .event-card.open .chevron {
-      transform: rotate(180deg);
-    }
-
-    /* Expandable Details */
-    .card-details {
-      display: none;
-      margin-top: 12px;
-      padding-top: 10px;
-      border-top: 1px dashed var(--border);
-      font-size: 13px;
-      color: var(--text-sub);
-    }
-
-    .event-card.open .card-details {
-      display: block;
-    }
-
-    .detail-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
-    .detail-label {
-      font-weight: 500;
-    }
-
-    .detail-value {
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .tag-status {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); padding-bottom: 40px; max-width: 480px; margin: 0 auto; }
+    header { background: var(--card-bg); padding: 16px; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+    .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .brand-icon { font-size: 28px; }
+    .brand-title h1 { font-size: 18px; font-weight: 700; color: var(--text-main); }
+    .brand-title p { font-size: 12px; color: var(--primary); font-weight: 600; }
+    .date-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+    .date-tabs::-webkit-scrollbar { display: none; }
+    .tab-btn { flex: 0 0 auto; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--card-bg); font-size: 13px; font-weight: 600; color: var(--text-sub); cursor: pointer; }
+    .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .itinerary-container { padding: 16px; }
+    .day-section { margin-bottom: 24px; }
+    .day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .day-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .day-pills { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+    .pill { font-size: 11px; padding: 4px 8px; border-radius: 12px; background: var(--border); color: var(--text-sub); font-weight: 600; }
+    .event-card { background: var(--card-bg); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; box-shadow: var(--shadow); border-left: 4px solid var(--primary); }
+    .card-main { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .time-slot { font-size: 12px; font-weight: 700; color: var(--time-color); margin-bottom: 4px; }
+    .event-title { font-size: 15px; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
+    .card-actions { display: flex; align-items: center; gap: 6px; }
+    .chevron { font-size: 12px; color: var(--text-sub); transition: transform 0.2s; }
+    .event-card.open .chevron { transform: rotate(180deg); }
+    .card-details { display: none; margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); font-size: 13px; color: var(--text-sub); }
+    .event-card.open .card-details { display: block; }
+    .detail-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .detail-label { font-weight: 500; }
+    .detail-value { font-weight: 600; color: var(--text-main); text-align: right; }
+    .tag-status { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }
     .status-locked { background: #dcfce7; color: #15803d; }
     .status-pending { background: #fef3c7; color: #b45309; }
   </style>
 </head>
 <body>
-
-  <!-- Header Section -->
   <header>
     <div class="brand">
       <div class="brand-icon">🤿</div>
       <div class="brand-title">
         <h1>Taiwan 2026</h1>
-        <p>12-Day Dive & WFH Island Hopping</p>
+        <p>12-Day Dive, WFH & Music Festival Itinerary</p>
       </div>
     </div>
-
-    <!-- Date Navigation Tabs -->
     <div class="date-tabs">
-      <button class="tab-btn active" onclick="filterDate('all')">全覽</button>
-      <button class="tab-btn" onclick="filterDate('08.13')">08.13 (四)</button>
-      <button class="tab-btn" onclick="filterDate('08.16')">08.16 (日)</button>
-      <button class="tab-btn" onclick="filterDate('08.17')">08.17 (一)</button>
-      <button class="tab-btn" onclick="filterDate('08.18')">08.18 (二)</button>
-      <button class="tab-btn" onclick="filterDate('08.20')">08.20 (四)</button>
-      <button class="tab-btn" onclick="filterDate('08.21')">08.21 (五)</button>
-      <button class="tab-btn" onclick="filterDate('08.24')">08.24 (一)</button>
+      <button class="tab-btn active" onclick="filterDate('all', this)">全覽</button>
+      <button class="tab-btn" onclick="filterDate('08.13', this)">08.13</button>
+      <button class="tab-btn" onclick="filterDate('08.16', this)">08.16</button>
+      <button class="tab-btn" onclick="filterDate('08.17', this)">08.17 (WFH)</button>
+      <button class="tab-btn" onclick="filterDate('08.18', this)">08.18</button>
+      <button class="tab-btn" onclick="filterDate('08.20', this)">08.20</button>
+      <button class="tab-btn" onclick="filterDate('08.21', this)">08.21 (音樂祭)</button>
+      <button class="tab-btn" onclick="filterDate('08.22', this)">08.22 (WFH)</button>
+      <button class="tab-btn" onclick="filterDate('08.23', this)">08.23 (音樂祭)</button>
+      <button class="tab-btn" onclick="filterDate('08.24', this)">08.24</button>
     </div>
   </header>
 
-  <!-- Itinerary Container -->
   <div class="itinerary-container">
-
-    <!-- Day 1 -->
+    <!-- Day 08.13 -->
     <div class="day-section" data-date="08.13">
-      <div class="day-header">
-        <div class="day-title">📅 08.13 (四)</div>
-        <div class="day-pills">
-          <span class="pill">🌤️ 晴朗</span>
-          <span class="pill">📍 小琉球</span>
+      <div class="day-header"><div class="day-title">📅 08.13 (四)</div><div class="day-pills"><span class="pill">✈️ CX424</span><span class="pill">📍 小琉球</span></div></div>
+      <div class="event-card" onclick="toggleCard(this)">
+        <div class="card-main"><div><div class="time-slot">11:05 - 12:40</div><div class="event-title">✈️ 國泰 CX424 (HKG ✈️ KHH)</div></div><span class="chevron">▼</span></div>
+        <div class="card-details">
+          <div class="detail-row"><span class="detail-label">Ref / 票號</span><span class="detail-value">DGUTJT / 1602134312814</span></div>
+          <div class="detail-row"><span class="detail-label">開支</span><span class="detail-value">HK$ 415 <span class="tag-status status-locked">已鎖定</span></span></div>
         </div>
       </div>
-
       <div class="event-card" onclick="toggleCard(this)">
-        <div class="card-main">
-          <div>
-            <div class="time-slot">11:05 - 12:40</div>
-            <div class="event-title">✈️ 國泰 CX424 (HKG ✈️ KHH)</div>
-          </div>
-          <div class="card-actions">
-            <button class="icon-btn">📍</button>
-            <button class="icon-btn blue">🌐</button>
-            <span class="chevron">▼</span>
-          </div>
-        </div>
+        <div class="card-main"><div><div class="time-slot">14:30 - 18:00</div><div class="event-title">🤿 小琉球 OW 潛水考照 Day 1</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
-          <div class="detail-row"><span class="detail-label">交通方式</span><span class="detail-value">國泰航空 ID 機票</span></div>
-          <div class="detail-row"><span class="detail-label">開支</span><span class="detail-value">HK$ 450 <span class="tag-status status-locked">已鎖定</span></span></div>
-          <div class="detail-row"><span class="detail-label">備註</span><span class="detail-value">12:40 降落高雄，接 13:00 計程車至東港</span></div>
-        </div>
-      </div>
-
-      <div class="event-card" onclick="toggleCard(this)">
-        <div class="card-main">
-          <div>
-            <div class="time-slot">14:00 - 18:00</div>
-            <div class="event-title">🤿 小琉球 OW 潛水訓練 Day 1</div>
-          </div>
-          <div class="card-actions">
-            <button class="icon-btn">📍</button>
-            <span class="chevron">▼</span>
-          </div>
-        </div>
-        <div class="card-details">
-          <div class="detail-row"><span class="detail-label">住宿</span><span class="detail-value">琉潛背包房 (含於包套內)</span></div>
-          <div class="detail-row"><span class="detail-label">行程內容</span><span class="detail-value">平靜水域 & 學科課程</span></div>
+          <div class="detail-row"><span class="detail-label">住宿</span><span class="detail-value">琉潛背包房 (OW 包套內)</span></div>
+          <div class="detail-row"><span class="detail-label">活動</span><span class="detail-value">平靜水域與學科訓練</span></div>
         </div>
       </div>
     </div>
 
-    <!-- Day 2 (WFH Day) -->
+    <!-- Day 08.16 -->
+    <div class="day-section" data-date="08.16">
+      <div class="day-header"><div class="day-title">📅 08.16 (日)</div><div class="day-pills"><span class="pill">🚆 移防台東</span></div></div>
+      <div class="event-card" onclick="toggleCard(this)">
+        <div class="card-main"><div><div class="time-slot">15:00 - 16:30</div><div class="event-title">🚆 枋寮 🚆 台東火車</div></div><span class="chevron">▼</span></div>
+        <div class="card-details">
+          <div class="detail-row"><span class="detail-label">交通開支</span><span class="detail-value">HK$ 180 (含東港計程車 + 自強號)</span></div>
+        </div>
+      </div>
+      <div class="event-card" onclick="toggleCard(this)">
+        <div class="card-main"><div><div class="time-slot">15:00 Check-in</div><div class="event-title">🏠 Easy Life Simple Life B&B</div></div><span class="chevron">▼</span></div>
+        <div class="card-details">
+          <div class="detail-row"><span class="detail-label">Ref / 狀態</span><span class="detail-value">Agoda: 1758199955 <span class="tag-status status-locked">已鎖定</span></span></div>
+          <div class="detail-row"><span class="detail-label">時間</span><span class="detail-value">Check-in: 15:00 | Check-out: 11:00 (8/18)</span></div>
+          <div class="detail-row"><span class="detail-label">開支</span><span class="detail-value">HK$ 947 (2晚)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 08.17 (WFH 1) -->
     <div class="day-section" data-date="08.17">
-      <div class="day-header">
-        <div class="day-title">📅 08.17 (一)</div>
-        <div class="day-pills">
-          <span class="pill">💻 WFH</span>
-          <span class="pill">📍 台東市</span>
-        </div>
-      </div>
-
+      <div class="day-header"><div class="day-title">📅 08.17 (一)</div><div class="day-pills"><span class="pill" style="background:#ede9fe; color:#7c3aed;">💻 WFH Day #1</span></div></div>
       <div class="event-card" style="border-left-color: #8b5cf6;" onclick="toggleCard(this)">
-        <div class="card-main">
-          <div>
-            <div class="time-slot">11:30 - 20:30</div>
-            <div class="event-title">💻 全天 WFH 遠距工作</div>
-          </div>
-          <div class="card-actions">
-            <button class="icon-btn pink">📷</button>
-            <span class="chevron">▼</span>
-          </div>
-        </div>
+        <div class="card-main"><div><div class="time-slot">全天</div><div class="event-title">💻 台東 WFH 遠距工作</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
-          <div class="detail-row"><span class="detail-label">地點</span><span class="detail-value">Easy Life Simple Life B&B / 市區 Cafe</span></div>
-          <div class="detail-row"><span class="detail-label">預算/餐費</span><span class="detail-value">HK$ 250 (Foodpanda 外賣 + 咖啡)</span></div>
-          <div class="detail-row"><span class="detail-label">住宿狀態</span><span class="detail-value">Easy Life B&B <span class="tag-status status-locked">已確定 (HK$ 947/2晚)</span></span></div>
+          <div class="detail-row"><span class="detail-label">地點</span><span class="detail-value">Easy Life B&B / 市區 Cafe</span></div>
+          <div class="detail-row"><span class="detail-label">預算</span><span class="detail-value">HK$ 250 (餐費與咖啡)</span></div>
         </div>
       </div>
     </div>
 
-    <!-- Day 3 (Green Island to Kaohsiung) -->
+    <!-- Day 08.18 -->
+    <div class="day-section" data-date="08.18">
+      <div class="day-header"><div class="day-title">📅 08.18 (二)</div><div class="day-pills"><span class="pill">🤿 綠島 AOW</span></div></div>
+      <div class="event-card" onclick="toggleCard(this)">
+        <div class="card-main"><div><div class="time-slot">09:30 - 10:20</div><div class="event-title">🚢 富岡 🚢 綠島 (海子潛水旅宿)</div></div><span class="chevron">▼</span></div>
+        <div class="card-details">
+          <div class="detail-row"><span class="detail-label">住宿</span><span class="detail-value">海子潛水旅宿 (AOW 包套內)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 08.20 -->
     <div class="day-section" data-date="08.20">
-      <div class="day-header">
-        <div class="day-title">📅 08.20 (四)</div>
-        <div class="day-pills">
-          <span class="pill">🚆 橫跨移防</span>
-          <span class="pill">📍 高雄</span>
+      <div class="day-header"><div class="day-title">📅 08.20 (四)</div><div class="day-pills"><span class="pill">🚆 移防高雄</span></div></div>
+      <div class="event-card" onclick="toggleCard(this)">
+        <div class="card-main"><div><div class="time-slot">16:30 - 19:00</div><div class="event-title">🚆 台東 🚆 高雄 (新自強號)</div></div><span class="chevron">▼</span></div>
+        <div class="card-details">
+          <div class="detail-row"><span class="detail-label">交通開支</span><span class="detail-value">HK$ 161 (計程車 + 火車)</span></div>
         </div>
       </div>
-
       <div class="event-card" onclick="toggleCard(this)">
-        <div class="card-main">
-          <div>
-            <div class="time-slot">16:30 - 19:00</div>
-            <div class="event-title">🚆 台鐵新自強號 (台東 ➡️ 高雄)</div>
-          </div>
-          <div class="card-actions">
-            <button class="icon-btn blue">🌐</button>
-            <span class="chevron">▼</span>
-          </div>
-        </div>
+        <div class="card-main"><div><div class="time-slot">15:00 Check-in</div><div class="event-title">🏨 頭等艙飯店 - 高雄站前館</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
-          <div class="detail-row"><span class="detail-label">交通開支</span><span class="detail-value">HK$ 88 (EMU3000 車票)</span></div>
-          <div class="detail-row"><span class="detail-label">過夜住宿</span><span class="detail-value">高雄車站周邊飯店 <span class="tag-status status-pending">待預訂 (~HK$ 400)</span></span></div>
-          <div class="detail-row"><span class="detail-label">晚間行程</span><span class="detail-value">六合夜市 / 瑞豐夜市食晚餐宵夜</span></div>
+          <div class="detail-row"><span class="detail-label">Ref / 狀態</span><span class="detail-value">Agoda: 1758213494 <span class="tag-status status-locked">已鎖定</span></span></div>
+          <div class="detail-row"><span class="detail-label">時間</span><span class="detail-value">Check-in: 15:00 | Check-out: 11:00 (8/21)</span></div>
+          <div class="detail-row"><span class="detail-label">開支</span><span class="detail-value">HK$ 341.56</span></div>
         </div>
       </div>
     </div>
 
-    <!-- Day 4 (Penghu Flight) -->
+    <!-- Day 08.21 (Music Fest 1) -->
     <div class="day-section" data-date="08.21">
-      <div class="day-header">
-        <div class="day-title">📅 08.21 (五)</div>
-        <div class="day-pills">
-          <span class="pill">✈️ 離島飛行</span>
-          <span class="pill">📍 澎湖</span>
+      <div class="day-header"><div class="day-title">📅 08.21 (五)</div><div class="day-pills"><span class="pill">✈️ 立榮航空</span><span class="pill" style="background:#fce7f3; color:#db2777;">🎸 澎大海音樂祭</span></div></div>
+      <div class="event-card" onclick="toggleCard(this)">
+        <div class="card-main"><div><div class="time-slot">11:40 - 12:25</div><div class="event-title">✈️ 立榮 B7-8697 (KHH ✈️ MZG)</div></div><span class="chevron">▼</span></div>
+        <div class="card-details">
+          <div class="detail-row"><span class="detail-label">Ref / 票號</span><span class="detail-value">E4M2N2 / 5252471545221</span></div>
+          <div class="detail-row"><span class="detail-label">開支</span><span class="detail-value">HK$ 441 <span class="tag-status status-locked">已鎖定</span></span></div>
         </div>
       </div>
-
       <div class="event-card" onclick="toggleCard(this)">
-        <div class="card-main">
-          <div>
-            <div class="time-slot">07:55 - 08:40</div>
-            <div class="event-title">✈️ 立榮 B78691 (高雄 KHH ✈️ 澎湖 MZG)</div>
-          </div>
-          <div class="card-actions">
-            <button class="icon-btn">📍</button>
-            <button class="icon-btn blue">🌐</button>
-            <span class="chevron">▼</span>
-          </div>
-        </div>
+        <div class="card-main"><div><div class="time-slot">14:00 Check-in</div><div class="event-title">🏨 安海景大飯店 (AN-I Hotel)</div></div><span class="chevron">▼</span></div>
         <div class="card-details">
-          <div class="detail-row"><span class="detail-label">機票費用</span><span class="detail-value">HK$ 441 <span class="tag-status status-pending">待預訂</span></span></div>
-          <div class="detail-row"><span class="detail-label">住宿</span><span class="detail-value">安一大飯店 <span class="tag-status status-locked">已確定</span></span></div>
-          <div class="detail-row"><span class="detail-label">當地活動</span><span class="detail-value">馬公租機車環島、吃海鮮大餐</span></div>
+          <div class="detail-row"><span class="detail-label">Ref / 狀態</span><span class="detail-value">Agoda: 1758184888 <span class="tag-status status-locked">已鎖定</span></span></div>
+          <div class="detail-row"><span class="detail-label">時間</span><span class="detail-value">Check-in: 14:00 | Check-out: 10:00 (8/23)</span></div>
+        </div>
+      </div>
+      <div class="event-card" style="border-left-color: #db2777;" onclick="toggleCard(this)">
+        <div class="card-main"><div><div class="time-slot">18:00 - 22:00</div><div class="event-title">🎸 澎大海音樂祭 Day 1</div></div><span class="chevron">▼</span></div>
+        <div class="card-details">
+          <div class="detail-row"><span class="detail-label">18:00 - 19:00</span><span class="detail-value">icyball 冰球樂團</span></div>
+          <div class="detail-row"><span class="detail-label">21:00</span><span class="detail-value">告五人 Accusefive</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 08.22 (WFH 2 & Music Fest 2) -->
+    <div class="day-section" data-date="08.22">
+      <div class="day-header"><div class="day-title">📅 08.22 (六)</div><div class="day-pills"><span class="pill" style="background:#ede9fe; color:#7c3aed;">💻 WFH #2</span><span class="pill" style="background:#fce7f3; color:#db2777;">🎸 音樂祭</span></div></div>
+      <div class="event-card" style="border-left-color: #8b5cf6;" onclick="toggleCard(this)">
+        <div class="card-main"><div><div class="time-slot">白天</div><div class="event-title">💻 澎湖 WFH 遠距工作</div></div><span class="chevron">▼</span></div>
+        <div class="card-details">
+          <div class="detail-row"><span class="detail-label">地點</span><span class="detail-value">安海景大飯店 / 馬公 Cafe</span></div>
+        </div>
+      </div>
+      <div class="event-card" style="border-left-color: #db2777;" onclick="toggleCard(this)">
+        <div class="card-main"><div><div class="time-slot">14:00 & 17:30</div><div class="event-title">🎸 澎大海音樂祭 Day 2</div></div><span class="chevron">▼</span></div>
+        <div class="card-details">
+          <div class="detail-row"><span class="detail-label">14:00</span><span class="detail-value">SoulFa 靈魂沙發</span></div>
+          <div class="detail-row"><span class="detail-label">17:30</span><span class="detail-value">Sweet John 甜約翰</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 08.23 (Music Fest 3) -->
+    <div class="day-section" data-date="08.23">
+      <div class="day-header"><div class="day-title">📅 08.23 (日)</div><div class="day-pills"><span class="pill" style="background:#fce7f3; color:#db2777;">🎸 音樂祭</span><span class="pill">✈️ 飛台北</span></div></div>
+      <div class="event-card" style="border-left-color: #db2777;" onclick="toggleCard(this)">
+        <div class="card-main"><div><div class="time-slot">18:30</div><div class="event-title">🎸 澎大海音樂祭 Day 3</div></div><span class="chevron">▼</span></div>
+        <div class="card-details">
+          <div class="detail-row"><span class="detail-label">18:30</span><span class="detail-value">Easy Weeds</span></div>
+          <div class="detail-row"><span class="detail-label">後續</span><span class="detail-value">機場還車 🛵 ➔ 飛台北松山機場 (TSA)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 08.24 -->
+    <div class="day-section" data-date="08.24">
+      <div class="day-header"><div class="day-title">📅 08.24 (一)</div><div class="day-pills"><span class="pill">✈️ 返回香港</span></div></div>
+      <div class="event-card" onclick="toggleCard(this)">
+        <div class="card-main"><div><div class="time-slot">晚上</div><div class="event-title">✈️ 台北 (TPE) ✈️ 香港 (HKG)</div></div><span class="chevron">▼</span></div>
+        <div class="card-details">
+          <div class="detail-row"><span class="detail-label">交通</span><span class="detail-value">機捷 + 航班返港 (~HK$ 510)</span></div>
         </div>
       </div>
     </div>
@@ -420,25 +224,12 @@
   </div>
 
   <script>
-    // Expandable Card Toggle
-    function toggleCard(card) {
-      card.classList.toggle('open');
-    }
-
-    // Filter by Date Tab
-    function filterDate(date) {
-      // Update Tab CSS
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-
-      // Filter Sections
-      const sections = document.querySelectorAll('.day-section');
-      sections.forEach(sec => {
-        if (date === 'all' || sec.getAttribute('data-date') === date) {
-          sec.style.display = 'block';
-        } else {
-          sec.style.display = 'none';
-        }
+    function toggleCard(card) { card.classList.toggle('open'); }
+    function filterDate(date, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.day-section').forEach(sec => {
+        sec.style.display = (date === 'all' || sec.getAttribute('data-date') === date) ? 'block' : 'none';
       });
     }
   </script>
